@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-stable
+  namespace: deploy-strategies
+spec:
+  replicas: 9       # ~90%
+  selector:
+    matchLabels:
+      app: web
+      track: stable
+  template:
+    metadata:
+      labels:
+        app: web
+        track: stable
+    spec:
+      containers:
+      - name: app
+        image: app-blue:1.0
+        ports: [{containerPort: 8080}]

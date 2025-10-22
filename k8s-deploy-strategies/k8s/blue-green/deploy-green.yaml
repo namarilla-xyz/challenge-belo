@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-green
+  namespace: deploy-strategies
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web
+      color: green
+  template:
+    metadata:
+      labels:
+        app: web
+        color: green
+        role: inactive   # ⬅️ empieza inactivo
+    spec:
+      containers:
+      - name: app
+        image: app-green:2.0
+        ports: [{containerPort: 8080}]

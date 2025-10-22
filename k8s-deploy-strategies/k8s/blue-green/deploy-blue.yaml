@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-blue
+  namespace: deploy-strategies
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web
+      color: blue
+  template:
+    metadata:
+      labels:
+        app: web
+        color: blue
+        role: active    # ⬅️ empieza activo
+    spec:
+      containers:
+      - name: app
+        image: app-blue:1.0
+        ports: [{containerPort: 8080}]

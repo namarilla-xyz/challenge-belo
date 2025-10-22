@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-svc
+  namespace: deploy-strategies
+spec:
+  selector:
+    app: web
+    role: active
+  ports:
+  - port: 80
+    targetPort: 8080

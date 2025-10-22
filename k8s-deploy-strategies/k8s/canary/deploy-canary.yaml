@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-canary
+  namespace: deploy-strategies
+spec:
+  replicas: 1       # ~10%
+  selector:
+    matchLabels:
+      app: web
+      track: canary
+  template:
+    metadata:
+      labels:
+        app: web
+        track: canary
+    spec:
+      containers:
+      - name: app
+        image: app-green:2.0
+        ports: [{containerPort: 8080}]
